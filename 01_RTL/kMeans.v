@@ -49,11 +49,22 @@ reg     [15:0]  mem_out;
  *  Initial Point input (4)
  *
  */
+reg      [1:0]  init_in_count;
+always @(posedge clk) begin
+  if (!rst_n) 
+    init_in_count <= 'd0;    
+  else if (current_state==ST_INIT_INPUT || (current_state==ST_IDLE && in_valid)) 
+    init_in_count <= init_in_count + 'd1;
+  else
+    init_in_count <= 'd0;
+end
+
+
 reg     [15:0]  current_element0;
 always @(posedge clk) begin
   if (!rst_n)
     current_element0 <= 'd0;    
-  else if (current_state==ST_INIT_INPUT || (current_state==ST_IDLE && in_valid))
+  else if (( current_state==ST_INIT_INPUT || (current_state==ST_IDLE && in_valid) ) && init_in_count=='d0)
     current_element0 <= in_data;
   else if (current_state==ST_UPDATE && data_num0!='d0) begin
     current_element0[15:8] <= accu_element_x0 / data_num0;
@@ -67,7 +78,7 @@ reg     [15:0]  current_element1;
 always @(posedge clk) begin
   if (!rst_n)
     current_element1 <= 'd0;    
-  else if (current_state==ST_INIT_INPUT || (current_state==ST_IDLE && in_valid))
+  else if (( current_state==ST_INIT_INPUT || (current_state==ST_IDLE && in_valid) ) && init_in_count=='d1)
     current_element1 <= in_data;
   else if (current_state==ST_UPDATE && data_num1!='d0) begin
     current_element1[15:8] <= accu_element_x1 / data_num1;
@@ -81,7 +92,7 @@ reg     [15:0]  current_element2;
 always @(posedge clk) begin
   if (!rst_n)
     current_element2 <= 'd0;    
-  else if (current_state==ST_INIT_INPUT || (current_state==ST_IDLE && in_valid))
+  else if (( current_state==ST_INIT_INPUT || (current_state==ST_IDLE && in_valid) ) && init_in_count=='d2)
     current_element2 <= in_data;
   else if (current_state==ST_UPDATE && data_num2!='d0) begin
     current_element2[15:8] <= accu_element_x2 / data_num2;
@@ -95,7 +106,7 @@ reg     [15:0]  current_element3;
 always @(posedge clk) begin
   if (!rst_n)
     current_element3 <= 'd0;    
-  else if (current_state==ST_INIT_INPUT || (current_state==ST_IDLE && in_valid))
+  else if (( current_state==ST_INIT_INPUT || (current_state==ST_IDLE && in_valid) ) && init_in_count=='d3)
     current_element3 <= in_data;
   else if (current_state==ST_UPDATE && data_num3!='d0) begin
     current_element3[15:8] <= accu_element_x3 / data_num3;
@@ -474,7 +485,7 @@ always @(posedge clk) begin
   if (!rst_n) 
     mem_out <= 'd0;    
   else  
-    mem_out_net <= out_data_net;
+    mem_out <= mem_out_net;
 end
 
 
@@ -492,13 +503,14 @@ always @(posedge clk) begin
   end
 end
 
-wire  output_done = (mem_count_out==mem_count_in)? 1'b1:1'b0;
 
 
 /*
  *  Check
  *
  */
+
+wire  init_input_done = (init_in_count==3)? 1'b1:1'b0;
 
 wire  element0_status = (previous_element0==current_element0)? 1'b1:1'b0;
 wire  element1_status = (previous_element1==current_element1)? 1'b1:1'b0;
