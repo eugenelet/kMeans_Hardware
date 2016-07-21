@@ -1,7 +1,7 @@
 `timescale 1ns/10ps
 
-//`include "PATTERN.v"
-`include "PATTERN_mem.v"
+`include "PATTERN.v"
+//`include "PATTERN_mem.v"
 
 `ifdef RTL
   `include "CORE.v"
@@ -41,25 +41,22 @@ wire  [15:0]  in_data;
 wire          out_valid;
 wire  [15:0]  out_data;
 
-`ifdef MEM
-PATTERN_mem u_pattern(
-  clk,
-  rst_n,
-  in_valid,
-  in_data,
-  out_valid,
-  out_data
-);
-//`else
-//PATTERN u_pattern(
+//PATTERN_mem u_pattern(
 //  clk,
 //  rst_n,
 //  in_valid,
 //  in_data,
 //  out_valid,
 //  out_data
-//);  
-`endif
+//);
+PATTERN u_pattern(
+  clk,
+  rst_n,
+  in_valid,
+  in_data,
+  out_valid,
+  out_data
+);  
 
 
 
