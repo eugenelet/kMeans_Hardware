@@ -88,7 +88,7 @@ initial begin
     end
     if(out_data!==(1024/i)) begin
       $display("");
-      $display("FAIL %4d", 1024/i);
+      $display("FAIL %4d", 1024/(i+1));
       $display("");
       error = 1;
     end
