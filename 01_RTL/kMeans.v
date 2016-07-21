@@ -43,6 +43,8 @@ reg     [11:0] data_num0,
                data_num2,
                data_num3;
 
+reg     [15:0]  mem_out;
+
 /*
  *  Initial Point input (4)
  *
@@ -453,6 +455,28 @@ always @(posedge clk) begin
   end
 end
 
+/*
+ *  MEM CONTROL
+ *
+ */
+ reg        [11:0]  mem_addr;
+always @(posedge clk) begin
+  if (!rst_n) 
+    mem_addr <= 'd0;
+  else if ( current_state==ST_DATA_INPUT || (current_state==ST_INIT_INPUT && in_valid) ) 
+    mem_addr <= mem_count_in;
+  else if (current_state==ST_GROUP_ACC)
+    mem_addr <= group_acc_element_count;
+end
+
+wire      [15:0]  mem_out_net;
+always @(posedge clk) begin
+  if (!rst_n) 
+    mem_out <= 'd0;    
+  else  
+    mem_out_net <= out_data_net;
+end
+
 
 /*
  *  FSM
@@ -539,7 +563,7 @@ end
 SHAB90_4096X16X1CM16 u_SHAB90_4096X16X1CM16(
   .A    (mem_addr),
   .DI   (mem_din),
-  .DO   (mem_out),
+  .DO   (mem_out_net),
   .WEB  (mem_we_b),
   .CK   (clk),
   .OE   (1'd1),
