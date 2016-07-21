@@ -74,7 +74,7 @@ always @(posedge clk) begin
     #1;
     mem_we_b <= 1'b0;
   end
-  else if(current_state == ST_IDLE) begin
+  else if(!in_valid) begin
     #1;
     mem_we_b <= 1'b1;
   end
