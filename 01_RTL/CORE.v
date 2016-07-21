@@ -121,19 +121,19 @@ end
 reg     [11:0]  mem_addr;
 always @(posedge clk) begin
   if (!rst_n) begin
-    #1;
+    //#1;
     mem_addr <= 'd0;        
   end
   else if ( current_state==ST_INPUT || (current_state==ST_IDLE&&in_valid) ) begin
-    #1;
+    //#1;
     mem_addr <= mem_count_in;
   end
   else if (current_state == ST_OUTPUT) begin
-    #1;
+    //#1;
     mem_addr <= mem_count_out;
   end
   else if(current_state == ST_IDLE) begin
-    #1;
+    //#1;
     mem_addr <= 'd0;
   end
 end
