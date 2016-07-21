@@ -367,6 +367,16 @@ end
  *  UPDATE CLUSTER POSITION (Done in Parallel)
  *
  */
+reg             update_done;
+always @(posedge clk) begin
+  if (!rst_n) 
+    update_done <= 1'b0;    
+  else if (current_state == ST_UPDATE) 
+    update_done <= 1'b1;
+  else 
+    update_done <= 1'b0;
+end
+ 
 reg       [15:0]  previous_element0;
 always @(posedge clk) begin
   if (!rst_n)
@@ -407,15 +417,7 @@ always @(posedge clk) begin
     previous_element3 <= 'd0;
 end
 
-reg             update_done;
-always @(posedge clk) begin
-  if (!rst_n) 
-    update_done <= 1'b0;    
-  else if (current_state == ST_UPDATE) 
-    update_done <= 1'b1;
-  else 
-    update_done <= 1'b0;
-end
+
 
 /*
  *  OUTPUT
