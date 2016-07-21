@@ -86,14 +86,7 @@ end
  *
  */
 
-always @(posedge clk) begin
-  if (!rst_n)
-    out_valid <= 1'b0;  
-  else if(current_state == ST_OUTPUT)
-    out_valid <= 1'b1;
-  else
-    out_valid <= 1'b0;
-end
+
 
 wire     [15:0]  mem_out;
 always @(posedge clk) begin
@@ -124,7 +117,7 @@ always @(posedge clk) begin
     //#1;
     mem_addr <= 'd0;        
   end
-  else if ( current_state==ST_INPUT || (current_state==ST_IDLE&&in_valid) ) begin
+  else if ( current_state==ST_INPUT || ((current_state==ST_IDLE) &&in_valid) ) begin
     //#1;
     mem_addr <= mem_count_in;
   end
@@ -136,6 +129,15 @@ always @(posedge clk) begin
     //#1;
     mem_addr <= 'd0;
   end
+end
+
+always @(posedge clk) begin
+  if (!rst_n)
+    out_valid <= 1'b0;  
+  else if(current_state==ST_OUTPUT && mem_addr=='d0)
+    out_valid <= 1'b1;
+  else
+    out_valid <= 1'b0;
 end
 
 /*
