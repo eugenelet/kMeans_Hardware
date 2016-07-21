@@ -64,19 +64,19 @@ always @(posedge clk) begin
   end
 end
 
-reg             mem_we;
+reg             mem_we_b;
 always @(posedge clk) begin
   if (!rst_n) begin
     #1;
-    mem_we <= 1'b0;        
+    mem_we_b <= 1'b1;        
   end
   else if ( current_state==ST_INPUT || (current_state==ST_IDLE&&in_valid) ) begin
     #1;
-    mem_we <= 1'b1;
+    mem_we_b <= 1'b0;
   end
   else if(current_state == ST_IDLE) begin
     #1;
-    mem_we <= 1'b0;
+    mem_we_b <= 1'b1;
   end
 end
 
@@ -183,7 +183,7 @@ SHAB90_4096X16X1CM16 u_SHAB90_4096X16X1CM16(
   .A    (mem_addr),
   .DI   (mem_din),
   .DO   (mem_out),
-  .WEB  (mem_we),
+  .WEB  (mem_we_b),
   .CK   (clk),
   .OE   (1'd1),
   .CS   (1'd1)
