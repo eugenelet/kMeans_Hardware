@@ -58,6 +58,8 @@ initial begin
   $finish;
 end
 
+integer i,j;
+reg     error;
 initial begin
   
   in_valid  = 0;
