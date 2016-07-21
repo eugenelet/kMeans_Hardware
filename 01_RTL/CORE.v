@@ -126,11 +126,12 @@ always @(posedge clk) begin
   end
 end
 
+wire  output_done = (mem_count_out==mem_count_in)? 1'b1:1'b0;
 always @(*) begin
   case(current_state)
     ST_IDLE: begin
       if(in_valid)
-        next_state = ST_READY;
+        next_state = ST_INPUT;
       else
         next_state = ST_IDLE;
     end
