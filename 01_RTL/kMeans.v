@@ -146,7 +146,7 @@ reg             mem_we_b;
 always @(posedge clk) begin
   if (!rst_n)
     mem_we_b <= #1 1'b1;        
-  else if ( current_state==ST_DATA_INPUT && mem_count_in<'d4094 )
+  else if ( current_state==ST_DATA_INPUT && in_valid )
     mem_we_b <= #1 1'b0;
   else if(!in_valid)
     mem_we_b <= #1 1'b1;
