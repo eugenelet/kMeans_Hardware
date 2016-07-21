@@ -35,7 +35,7 @@ always @(posedge clk) begin
   if (!rst_n)
     mem_count_in <= 'd0;    
   else if ( current_state==ST_INPUT || (current_state==ST_IDLE&&in_valid) )
-    mem_count_in <= mem_count_in + 'd1;
+    mem_count_in <= mem_count_in + 'd1 + #1;
   else if(current_state == ST_IDLE)
     mem_count_in <= 'd0;
 end
@@ -47,7 +47,7 @@ always @(posedge clk) begin
   if (!rst_n)
     mem_din <= 'd0;        
   else if ( current_state==ST_INPUT || (current_state==ST_IDLE&&in_valid) )
-    mem_din <= in_data;
+    mem_din <= in_data + #1;
   else if(current_state == ST_IDLE)
     mem_din <= 'd0;
 end
@@ -57,7 +57,7 @@ always @(posedge clk) begin
   if (!rst_n)
     mem_we <= 1'b0;        
   else if ( current_state==ST_INPUT || (current_state==ST_IDLE&&in_valid) )
-    mem_we <= 1'b1;
+    mem_we <= 1'b1 + #1;
   else if(current_state == ST_IDLE)
     mem_we <= 1'b0;
 end
