@@ -314,7 +314,7 @@ end
 always @(posedge clk) begin
   if (!rst_n)
     accu_element_x1 <= 'd0;    
-  else if (current_state==ST_GROUP_ACC && group_acc_clus_count=='d3 && min_idx=='d0) 
+  else if (current_state==ST_GROUP_ACC && group_acc_clus_count=='d3 && min_idx=='d1) 
     accu_element_x1 <= accu_element_x1 + total_element[15:8];    
   else if (current_state == ST_CHECK)
     accu_element_x1 <= 'd0;
@@ -322,7 +322,7 @@ end
 always @(posedge clk) begin
   if (!rst_n)
     accu_element_y1 <= 'd0;    
-  else if (current_state==ST_GROUP_ACC && group_acc_clus_count=='d3 && min_idx=='d0) 
+  else if (current_state==ST_GROUP_ACC && group_acc_clus_count=='d3 && min_idx=='d1) 
     accu_element_y1 <= accu_element_y1 + total_element[7:0];    
   else if (current_state == ST_CHECK)
     accu_element_y1 <= 'd0;
@@ -331,7 +331,7 @@ end
 always @(posedge clk) begin
   if (!rst_n)
     accu_element_x2 <= 'd0;    
-  else if (current_state==ST_GROUP_ACC && group_acc_clus_count=='d3 && min_idx=='d0) 
+  else if (current_state==ST_GROUP_ACC && group_acc_clus_count=='d3 && min_idx=='d2) 
     accu_element_x2 <= accu_element_x2 + total_element[15:8];    
   else if (current_state == ST_CHECK)
     accu_element_x2 <= 'd0;
@@ -339,7 +339,7 @@ end
 always @(posedge clk) begin
   if (!rst_n)
     accu_element_y2 <= 'd0;    
-  else if (current_state==ST_GROUP_ACC && group_acc_clus_count=='d3 && min_idx=='d0) 
+  else if (current_state==ST_GROUP_ACC && group_acc_clus_count=='d3 && min_idx=='d2) 
     accu_element_y2 <= accu_element_y2 + total_element[7:0];    
   else if (current_state == ST_CHECK)
     accu_element_y2 <= 'd0;
@@ -348,7 +348,7 @@ end
 always @(posedge clk) begin
   if (!rst_n)
     accu_element_x3 <= 'd0;    
-  else if (current_state==ST_GROUP_ACC && group_acc_clus_count=='d3 && min_idx=='d0) 
+  else if (current_state==ST_GROUP_ACC && group_acc_clus_count=='d3 && min_idx=='d3) 
     accu_element_x3 <= accu_element_x3 + total_element[15:8];    
   else if (current_state == ST_CHECK)
     accu_element_x3 <= 'd0;
@@ -356,7 +356,7 @@ end
 always @(posedge clk) begin
   if (!rst_n)
     accu_element_y3 <= 'd0;    
-  else if (current_state==ST_GROUP_ACC && group_acc_clus_count=='d3 && min_idx=='d0) 
+  else if (current_state==ST_GROUP_ACC && group_acc_clus_count=='d3 && min_idx=='d3) 
     accu_element_y3 <= accu_element_y3 + total_element[7:0];    
   else if (current_state == ST_CHECK)
     accu_element_y3 <= 'd0;
