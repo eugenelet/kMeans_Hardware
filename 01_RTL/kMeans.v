@@ -545,3 +545,5 @@ SHAB90_4096X16X1CM16 u_SHAB90_4096X16X1CM16(
   .OE   (1'd1),
   .CS   (1'd1)
 );
+
+endmodule
