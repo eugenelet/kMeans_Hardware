@@ -32,40 +32,52 @@ reg     [1:0] current_state,
 
 reg     [1:0]   mem_count_in;
 always @(posedge clk) begin
-  if (!rst_n)
+  if (!rst_n) begin
+    #1;
     mem_count_in <= 'd0;    
+  end
   else if ( current_state==ST_INPUT || (current_state==ST_IDLE&&in_valid) ) begin
     #1;    
     mem_count_in <= mem_count_in + 'd1;
   end
-  else if(current_state == ST_IDLE)
+  else if(current_state == ST_IDLE) begin
+    #1;
     mem_count_in <= 'd0;
+  end
 end
 
 
 
 reg     [15:0]  mem_din;
 always @(posedge clk) begin
-  if (!rst_n)
+  if (!rst_n) begin
+    #1;
     mem_din <= 'd0;        
+  end
   else if ( current_state==ST_INPUT || (current_state==ST_IDLE&&in_valid) ) begin
     #1;
     mem_din <= in_data;
   end
-  else if(current_state == ST_IDLE)
+  else if(current_state == ST_IDLE) begin
+    #1;
     mem_din <= 'd0;
+  end
 end
 
 reg             mem_we;
 always @(posedge clk) begin
-  if (!rst_n)
+  if (!rst_n) begin
+    #1;
     mem_we <= 1'b0;        
+  end
   else if ( current_state==ST_INPUT || (current_state==ST_IDLE&&in_valid) ) begin
     #1;
     mem_we <= 1'b1;
   end
-  else if(current_state == ST_IDLE)
+  else if(current_state == ST_IDLE) begin
+    #1;
     mem_we <= 1'b0;
+  end
 end
 
 
