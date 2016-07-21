@@ -253,8 +253,7 @@ always @(*) begin
   endcase
 end
 
-wire  [8:0] min_distance = 9'h1FF;
-assign min_distance = (group_acc_clus_count==0 || distance<min_distance)? distance:min_distance;
+wire  [8:0] min_distance = (group_acc_clus_count==0 || distance<min_distance)? distance:min_distance;
 wire  [1:0] min_idx = (group_acc_clus_count==0 || distance<min_distance)? group_acc_clus_count:min_idx;
 
 
