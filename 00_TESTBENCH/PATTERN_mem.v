@@ -64,7 +64,7 @@ initial begin
   
   in_valid  = 0;
   in_data   = 0;
-
+  repeat(5) @(negedge clk);
   @(negedge clk)
   in_valid  = 1;
   in_data   = 'd1024;
