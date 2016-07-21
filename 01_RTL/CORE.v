@@ -27,7 +27,7 @@ parameter ST_IDLE   = 0,
           ST_OUTPUT = 2;
 
 reg     [1:0] current_state,
-        [1:0] next_state;
+              next_state;
 
 
 reg     [1:0]   mem_count_in;
