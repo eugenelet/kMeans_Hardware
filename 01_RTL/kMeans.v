@@ -124,7 +124,7 @@ reg     [11:0]   mem_count_in;
 always @(posedge clk) begin
   if (!rst_n)
     mem_count_in <= 'd0;    
-  else if ( current_state==ST_DATA_INPUT || init_in_count=='d3 )
+  else if ( current_state==ST_DATA_INPUT )
     mem_count_in <= mem_count_in + 'd1;
   else
     mem_count_in <= 'd0;
@@ -136,7 +136,7 @@ reg     [15:0]  mem_din;
 always @(posedge clk) begin
   if (!rst_n)
     mem_din <= #1'd0;        
-  else if ( current_state==ST_DATA_INPUT || init_in_count=='d3 )
+  else if ( current_state==ST_DATA_INPUT )
     mem_din <= #1 in_data;
   else
     mem_din <= #1 'd0;
@@ -146,7 +146,7 @@ reg             mem_we_b;
 always @(posedge clk) begin
   if (!rst_n)
     mem_we_b <= #1 1'b1;        
-  else if ( current_state==ST_DATA_INPUT || init_in_count=='d3 )
+  else if ( current_state==ST_DATA_INPUT )
     mem_we_b <= #1 1'b0;
   else if(!in_valid)
     mem_we_b <= #1 1'b1;
