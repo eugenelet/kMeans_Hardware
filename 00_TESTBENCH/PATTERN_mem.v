@@ -10,7 +10,7 @@
   `define CLK_PERIOD  15.0
 `endif
 
-`define MAX_LATENCY 50000000
+`define MAX_LATENCY 1000//50000000
 `define CONF_K      4
 `define CONF_N      4096
 
