@@ -1,6 +1,6 @@
 `timescale 1ns/10ps
 
-`include "PATTERN.v"
+//`include "PATTERN.v"
 `include "PATTERN_mem.v"
 
 `ifdef RTL
@@ -50,15 +50,15 @@ PATTERN_mem u_pattern(
   out_valid,
   out_data
 );
-`else
-PATTERN u_pattern(
-  clk,
-  rst_n,
-  in_valid,
-  in_data,
-  out_valid,
-  out_data
-);  
+//`else
+//PATTERN u_pattern(
+//  clk,
+//  rst_n,
+//  in_valid,
+//  in_data,
+//  out_valid,
+//  out_data
+//);  
 `endif
 
 
