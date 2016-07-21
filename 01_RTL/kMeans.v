@@ -371,7 +371,7 @@ reg       [15:0]  previous_element0;
 always @(posedge clk) begin
   if (!rst_n)
     previous_element0 <= 'd0;    
-  else if (current_state == ST_UPDATE) 
+  else if (current_state==ST_UPDATE && !update_done)  
     previous_element0 <= current_element0;
   else if (current_state == ST_IDLE)
     previous_element0 <= 'd0;
@@ -381,7 +381,7 @@ reg       [15:0]  previous_element1;
 always @(posedge clk) begin
   if (!rst_n)
     previous_element1 <= 'd0;    
-  else if (current_state == ST_UPDATE) 
+  else if (current_state==ST_UPDATE && !update_done)  
     previous_element1 <= current_element1;
   else if (current_state == ST_IDLE)
     previous_element1 <= 'd0;
@@ -391,7 +391,7 @@ reg       [15:0]  previous_element2;
 always @(posedge clk) begin
   if (!rst_n)
     previous_element2 <= 'd0;    
-  else if (current_state == ST_UPDATE) 
+  else if (current_state==ST_UPDATE && !update_done)  
     previous_element2 <= current_element2;
   else if (current_state == ST_IDLE)
     previous_element2 <= 'd0;
@@ -401,7 +401,7 @@ reg       [15:0]  previous_element3;
 always @(posedge clk) begin
   if (!rst_n)
     previous_element3 <= 'd0;    
-  else if (current_state == ST_UPDATE) 
+  else if (current_state==ST_UPDATE && !update_done) 
     previous_element3 <= current_element3;
   else if (current_state == ST_IDLE)
     previous_element3 <= 'd0;
