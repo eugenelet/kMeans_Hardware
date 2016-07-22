@@ -487,7 +487,9 @@ always @(posedge clk) begin
     mem_addr <= 'd0;
   else if ( current_state==ST_DATA_INPUT || (current_state==ST_INIT_INPUT && in_valid) ) 
     mem_addr <= mem_count_in;
-  else if (current_state==ST_CHECK || current_state==ST_GROUP_ACC)
+  else if (current_state==ST_CHECK)
+    mem_addr <= 'd0;
+  else if (current_state==ST_GROUP_ACC))
     mem_addr <= group_acc_element_count;
 end
 
