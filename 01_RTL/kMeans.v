@@ -529,7 +529,7 @@ wire  element0_status = (previous_element0==current_element0)? 1'b1:1'b0;
 wire  element1_status = (previous_element1==current_element1)? 1'b1:1'b0;
 wire  element2_status = (previous_element2==current_element2)? 1'b1:1'b0;
 wire  element3_status = (previous_element3==current_element3)? 1'b1:1'b0;
-wire  check_success   = element0_status & element1_status & element2_status & element0_status;//SUCCESS!!
+wire  check_success   = element0_status & element1_status & element2_status & element3_status;//SUCCESS!!
 
 wire  output_done     = (output_count=='d3)? 1'b1:1'b0;
 always @(*) begin
