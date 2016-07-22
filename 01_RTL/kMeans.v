@@ -691,7 +691,7 @@ end
  *
  */
 
-reg             update_done;
+//reg             update_done;
 //always @(posedge clk) begin
 //  if (!rst_n) 
 //    update_done <= 1'b0;    
