@@ -271,8 +271,6 @@ always @(posedge clk) begin
     min_distance <= 'd0;    
   else if (current_state==ST_GROUP_ACC && (group_acc_clus_count==0 || distance<min_distance) && group_acc_clus_count!='d4)
     min_distance <= distance;
-  else 
-    min_distance <= 'd0;
 end
 
 reg     [1:0] min_idx;
@@ -281,8 +279,6 @@ always @(posedge clk) begin
     min_idx <= 'd0;    
   else if (current_state==ST_GROUP_ACC && (group_acc_clus_count==0 || distance<min_distance) && group_acc_clus_count!='d4)
     min_idx <= group_acc_clus_count;
-  else 
-    min_idx <= 'd0;
 end
 
 
