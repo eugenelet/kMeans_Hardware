@@ -741,7 +741,7 @@ always @(posedge clk) begin
     previous_element3 <= 'd0;
 end
 
-wire  update_done = out_flag_x0 & out_data_x1 & out_flag_x2 & out_flag_x3 & out_flag_y0 & out_flag_y1 & out_flag_y2 & out_flag_y3;
+wire  update_done = out_flag_x0 & out_flag_x1 & out_flag_x2 & out_flag_x3 & out_flag_y0 & out_flag_y1 & out_flag_y2 & out_flag_y3;
 
 
 
