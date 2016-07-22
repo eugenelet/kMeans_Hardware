@@ -146,7 +146,7 @@ int main(int argc, char** argv){
 
 
 	for(int i = 0; i < CLUSTERS; i++){
-		cout << i << " = " << "X: " << currentElement[i].x << " " << "Y: " << currentElement[i].y << endl;
+		//cout << i << " = " << "X: " << currentElement[i].x << " " << "Y: " << currentElement[i].y << endl;
 		circle(image, Point(currentElement[i].x,currentElement[i].y), 2, Scalar(0, 255, 255));
 	}
 
@@ -156,16 +156,16 @@ int main(int argc, char** argv){
 		GroupAndAccumulate(totalElement, currentElement, accuElement, data_num);
 		UpdateClusterPosition(preElement, currentElement, accuElement, data_num);
 		for(int i = 0; i < CLUSTERS; i++){
-			cout << i << " = " << "X: " << currentElement[i].x << " " << "Y: " << currentElement[i].y << endl;
-			cout << "\t\t\tACCU X:" << accuElement[i].x << endl;
-			cout << "\t\t\tACCU Y:" << accuElement[i].y << endl;
-			cout << "\t\t\tDATA NUM: " << data_num[i] << endl;
+			//cout << i << " = " << "X: " << currentElement[i].x << " " << "Y: " << currentElement[i].y << endl;
+			//cout << "\t\t\tACCU X:" << accuElement[i].x << endl;
+			//cout << "\t\t\tACCU Y:" << accuElement[i].y << endl;
+			//cout << "\t\t\tDATA NUM: " << data_num[i] << endl;
 			circle(image, Point(currentElement[i].x,currentElement[i].y), 1, Scalar(255, 255, 255));
 			accuElement[i].x = 0;
 			accuElement[i].y = 0;
 			data_num[i] = 0;
 		}
-		cout << endl << endl;
+		//cout << endl << endl;
 	}
 	for(int i = 0; i < CLUSTERS; i++){
 		circle(image, Point(currentElement[i].x,currentElement[i].y), 3, Scalar(255, 255, 0));

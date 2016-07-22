@@ -74,7 +74,7 @@ end
 /***********************************************/
 
 wire      [7:0] out_data_wire_x0;
-
+wire            out_valid_div_x0;
 reg       [7:0] out_data_x0;
 always @(posedge clk) begin
   if (!rst_n) 
@@ -106,7 +106,7 @@ Division div_x0(
 );
 
 wire      [7:0] out_data_wire_y0;
-
+wire            out_valid_div_y0;
 reg       [7:0] out_data_y0;
 always @(posedge clk) begin
   if (!rst_n) 
@@ -141,7 +141,7 @@ Division div_y0(
 
 
 wire      [7:0] out_data_wire_x1;
-
+wire            out_valid_div_x1;
 reg       [7:0] out_data_x1;
 always @(posedge clk) begin
   if (!rst_n) 
@@ -173,7 +173,7 @@ Division div_x1(
 );
 
 wire      [7:0] out_data_wire_y1;
-
+wire            out_valid_div_y1;
 reg       [7:0] out_data_y1;
 always @(posedge clk) begin
   if (!rst_n) 
@@ -207,7 +207,7 @@ Division div_y1(
 /////////////////////////////////////////////////////////////////
 
 wire      [7:0] out_data_wire_x2;
-
+wire            out_valid_div_x2;
 reg       [7:0] out_data_x2;
 always @(posedge clk) begin
   if (!rst_n) 
@@ -239,7 +239,7 @@ Division div_x2(
 );
 
 wire      [7:0] out_data_wire_y2;
-
+wire            out_valid_div_y2;
 reg       [7:0] out_data_y2;
 always @(posedge clk) begin
   if (!rst_n) 
@@ -273,7 +273,7 @@ Division div_y2(
 /////////////////////////////////////////////////////////////////
 
 wire      [7:0] out_data_wire_x3;
-
+wire            out_valid_div_x3;
 reg       [7:0] out_data_x3;
 always @(posedge clk) begin
   if (!rst_n) 
@@ -305,7 +305,7 @@ Division div_x3(
 );
 
 wire      [7:0] out_data_wire_y3;
-
+wire            out_valid_div_y3;
 reg       [7:0] out_data_y3;
 always @(posedge clk) begin
   if (!rst_n) 
