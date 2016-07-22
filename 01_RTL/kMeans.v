@@ -156,11 +156,21 @@ end
  *  CHECK && SYNC
  *
  */
+reg     dummy_check_count;
+always @(posedge clk) begin
+  if (!rst_n) 
+    dummy_check_count <= 'd0;    
+  else if (current_state == ST_CHECK)
+    dummy_check_count <= dummy_check_count <= 'd1;
+  else 
+    dummy_check_count <= 'd0;
+end
+
 reg     sync_done;
 always @(posedge clk) begin
   if (!rst_n) 
     sync_done <= 1'b0;
-  else if (current_state == ST_CHECK)
+  else if (current_state==ST_CHECK && dummy_check_count=='d1)
     sync_done <= 1'b1;
   else
     sync_done <= 1'b0;
