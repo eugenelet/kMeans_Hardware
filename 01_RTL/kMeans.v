@@ -490,7 +490,7 @@ always @(posedge clk) begin
   else if (current_state==ST_CHECK)
     mem_addr <= 'd0;
   else if (current_state==ST_GROUP_ACC))
-    mem_addr <= group_acc_element_count;
+    mem_addr <= group_acc_element_count + 1;
 end
 
 wire      [15:0]  mem_out_net;
