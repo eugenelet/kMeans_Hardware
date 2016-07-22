@@ -216,12 +216,20 @@ end
 //    total_element_count <= 'd0;
 //end
 
+reg     [15:0] total_element_relay;//from mem
+always @(posedge clk) begin
+  if (!rst_n)
+    total_element_relay <= 'd0;        
+  else if (current_state==ST_GROUP_ACC || (current_state==ST_CHECK && sync_done))//start 1 cycle(s) earlier
+    total_element_relay <= mem_out;    
+end
+
 reg     [15:0] total_element;//from mem
 always @(posedge clk) begin
   if (!rst_n)
     total_element <= 'd0;        
   else if (current_state==ST_GROUP_ACC || (current_state==ST_CHECK && sync_done))//start 1 cycle(s) earlier
-    total_element <= mem_out;    
+    total_element <= total_element_relay;    
 end
 
 
