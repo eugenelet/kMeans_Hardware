@@ -194,7 +194,7 @@ always @(posedge clk) begin
 end
 
 //OUTER LOOP
-reg     [11:0] group_acc_element_count;
+reg     [12:0] group_acc_element_count;
 always @(posedge clk) begin
   if (!rst_n)
     group_acc_element_count <= 'd0;    
@@ -561,7 +561,7 @@ always @(*) begin
         next_state = ST_CHECK;
     end
     ST_GROUP_ACC: begin
-      if ( group_acc_element_count == (DATA_SIZE-1) )
+      if ( group_acc_element_count == DATA_SIZE )
         next_state = ST_UPDATE;
       else 
         next_state = ST_GROUP_ACC;
