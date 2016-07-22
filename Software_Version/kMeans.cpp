@@ -157,8 +157,9 @@ int main(int argc, char** argv){
 		UpdateClusterPosition(preElement, currentElement, accuElement, data_num);
 		for(int i = 0; i < CLUSTERS; i++){
 			cout << i << " = " << "X: " << currentElement[i].x << " " << "Y: " << currentElement[i].y << endl;
-			cout << "ACCU Y:" << accuElement[i].y << endl;
-			cout << "DATA NUM: " << data_num[i] << endl;
+			cout << "\t\t\tACCU X:" << accuElement[i].x << endl;
+			cout << "\t\t\tACCU Y:" << accuElement[i].y << endl;
+			cout << "\t\t\tDATA NUM: " << data_num[i] << endl;
 			circle(image, Point(currentElement[i].x,currentElement[i].y), 1, Scalar(255, 255, 255));
 			accuElement[i].x = 0;
 			accuElement[i].y = 0;

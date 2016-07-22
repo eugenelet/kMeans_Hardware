@@ -489,7 +489,7 @@ always @(posedge clk) begin
     mem_addr <= mem_count_in;
   else if (current_state==ST_CHECK)
     mem_addr <= 'd0;
-  else if (current_state==ST_GROUP_ACC)
+  else if (current_state==ST_GROUP_ACC && group_acc_element_count!=DATA_SIZE)
     mem_addr <= group_acc_element_count + 1;
 end
 
