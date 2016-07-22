@@ -98,7 +98,7 @@ end
 Division div_x0(
     .clk        (clk),
     .rst_n      (rst_n),
-    .in_valid   (in_valid),
+    .in_valid   (in_valid_div),
     .in_data_1  (accu_element_x0),
     .in_data_2  (data_num0),
     .out_valid  (out_valid_div_x0),
@@ -130,7 +130,7 @@ end
 Division div_y0(
     .clk        (clk),
     .rst_n      (rst_n),
-    .in_valid   (in_valid),
+    .in_valid   (in_valid_div),
     .in_data_1  (accu_element_y0),
     .in_data_2  (data_num0),
     .out_valid  (out_valid_div_y0),
@@ -165,7 +165,7 @@ end
 Division div_x1(
     .clk        (clk),
     .rst_n      (rst_n),
-    .in_valid   (in_valid),
+    .in_valid   (in_valid_div),
     .in_data_1  (accu_element_x1),
     .in_data_2  (data_num1),
     .out_valid  (out_valid_div_x1),
@@ -197,7 +197,7 @@ end
 Division div_y1(
     .clk        (clk),
     .rst_n      (rst_n),
-    .in_valid   (in_valid),
+    .in_valid   (in_valid_div),
     .in_data_1  (accu_element_y1),
     .in_data_2  (data_num1),
     .out_valid  (out_valid_div_y1),
@@ -231,7 +231,7 @@ end
 Division div_x2(
     .clk        (clk),
     .rst_n      (rst_n),
-    .in_valid   (in_valid),
+    .in_valid   (in_valid_div),
     .in_data_1  (accu_element_x2),
     .in_data_2  (data_num2),
     .out_valid  (out_valid_div_x2),
@@ -263,7 +263,7 @@ end
 Division div_y2(
     .clk        (clk),
     .rst_n      (rst_n),
-    .in_valid   (in_valid),
+    .in_valid   (in_valid_div),
     .in_data_1  (accu_element_y2),
     .in_data_2  (data_num2),
     .out_valid  (out_valid_div_y2),
@@ -297,7 +297,7 @@ end
 Division div_x3(
     .clk        (clk),
     .rst_n      (rst_n),
-    .in_valid   (in_valid),
+    .in_valid   (in_valid_div),
     .in_data_1  (accu_element_x3),
     .in_data_2  (data_num3),
     .out_valid  (out_valid_div_x3),
@@ -329,7 +329,7 @@ end
 Division div_y3(
     .clk        (clk),
     .rst_n      (rst_n),
-    .in_valid   (in_valid),
+    .in_valid   (in_valid_div),
     .in_data_1  (accu_element_y3),
     .in_data_2  (data_num3),
     .out_valid  (out_valid_div_y3),
