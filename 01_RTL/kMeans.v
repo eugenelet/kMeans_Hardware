@@ -20,7 +20,7 @@ parameter CLUSTER_SIZE  = 'd4,
 parameter ST_IDLE       = 0,
           ST_INIT_INPUT = 1,
           ST_DATA_INPUT = 2,
-          ST_CHECK      = 3,
+          ST_CHECK      = 3,//should move before out
           ST_GROUP_ACC  = 4,
           ST_UPDATE     = 5,
           ST_OUTPUT     = 6;
@@ -444,12 +444,12 @@ end
  *  CHECK && SYNC
  *
  */
-reg     dummy_check_count;
+reg     dummy_check_count;//add another state to eliminate this dummy
 always @(posedge clk) begin
   if (!rst_n) 
     dummy_check_count <= 'd0;    
   else if (current_state == ST_CHECK)
-    dummy_check_count <= dummy_check_count <= 'd1;
+    dummy_check_count <= 'd1;
   else 
     dummy_check_count <= 'd0;
 end
@@ -512,14 +512,14 @@ always @(posedge clk) begin
     total_element_relay <= mem_out;    
 end
 
-wire    [15:0]  total_element_hold_time_fix = (!rst_n)? 'd0:total_element_relay;
+//wire    [15:0]  total_element_hold_time_fix = (!rst_n)? 'd0:total_element_relay;
 
 reg     [15:0] total_element;//from mem
 always @(posedge clk) begin
   if (!rst_n)
     total_element <= 'd0;        
   else if (current_state==ST_GROUP_ACC || (current_state==ST_CHECK && sync_done))//start 1 cycle(s) earlier
-    total_element <= total_element_hold_time_fix;    
+    total_element <= total_element_relay;    
 end
 
 
@@ -580,7 +580,7 @@ always @(posedge clk) begin
 end
 
 
-//DATA_NUM
+//DATA_NUM (CAN SHARE SAME ADDER)
 always @(posedge clk) begin
   if (!rst_n)
     data_num0 <= 'd0;    
@@ -700,6 +700,10 @@ end
 //  else 
 //    update_done <= 1'b0;
 //end
+
+
+
+//DONT NEED PREVIOUS, JUST COMPARE DIVIDE RESULT WITH CURRENT 
 
 reg       [15:0]  previous_element0;
 always @(posedge clk) begin
