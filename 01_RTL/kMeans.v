@@ -486,6 +486,7 @@ always @(posedge clk) begin
     input_sync <= 1'b0;
 end
 
+
 /*
  *  GROUP AND ACCUMULATE
  *
