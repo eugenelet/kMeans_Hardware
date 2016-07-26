@@ -20,12 +20,13 @@ parameter CLUSTER_SIZE  = 'd4,
 parameter ST_IDLE       = 0,
           ST_INIT_INPUT = 1,
           ST_DATA_INPUT = 2,
-          ST_CHECK      = 3,//should move before out
+          ST_SYNC       = 3,// only used once to sync input data
           ST_GROUP_ACC  = 4,
           ST_UPDATE     = 5,
-          ST_OUTPUT     = 6;
+          ST_CHECK      = 6,// should move before out
+          ST_OUTPUT     = 7;
 
-reg     [2:0] current_state,
+reg     [3:0] current_state,
               next_state;
 
 reg     [19:0] accu_element_x0,
@@ -465,6 +466,25 @@ always @(posedge clk) begin
 end
 
 
+reg     dummy_sync_count;//add another state to eliminate this dummy
+always @(posedge clk) begin
+  if (!rst_n) 
+    dummy_sync_count <= 'd0;    
+  else if (current_state == ST_SYNC)
+    dummy_sync_count <= 'd1;
+  else 
+    dummy_sync_count <= 'd0;
+end
+
+reg     input_sync;
+always @(posedge clk) begin
+  if (!rst_n) 
+    sync_done <= 1'b0;
+  else if (current_state==ST_SYNC && dummy_sync_count=='d1)
+    input_sync <= 1'b1;
+  else
+    input_sync <= 1'b0;
+end
 
 /*
  *  GROUP AND ACCUMULATE
@@ -508,7 +528,7 @@ reg     [15:0] total_element_relay;//from mem
 always @(posedge clk) begin
   if (!rst_n)
     total_element_relay <= 'd0;        
-  else if (current_state==ST_GROUP_ACC || (current_state==ST_CHECK && sync_done))//start 1 cycle(s) earlier
+  else if (current_state==ST_GROUP_ACC || (current_state==ST_CHECK && sync_done) || (current_state==ST_SYNC && input_sync))//start 1 cycle(s) earlier
     total_element_relay <= mem_out;    
 end
 
@@ -518,7 +538,7 @@ reg     [15:0] total_element;//from mem
 always @(posedge clk) begin
   if (!rst_n)
     total_element <= 'd0;        
-  else if (current_state==ST_GROUP_ACC || (current_state==ST_CHECK && sync_done))//start 1 cycle(s) earlier
+  else if (current_state==ST_GROUP_ACC || (current_state==ST_CHECK && sync_done) || (current_state==ST_SYNC && input_sync))//start 1 cycle(s) earlier
     total_element <= total_element_relay;    
 end
 
@@ -807,7 +827,7 @@ always @(posedge clk) begin
     mem_addr <= 'd0;
   else if ( current_state==ST_DATA_INPUT || (current_state==ST_INIT_INPUT && in_valid) ) 
     mem_addr <= mem_count_in;
-  else if (current_state==ST_CHECK)
+  else if (current_state==ST_CHECK || current_state==ST_SYNC)
     mem_addr <= 'd0;
   else if (current_state==ST_GROUP_ACC && group_acc_element_count!=DATA_SIZE)
     mem_addr <= group_acc_element_count + 1;
@@ -868,17 +888,15 @@ always @(*) begin
     end
     ST_DATA_INPUT: begin
       if(!in_valid)
-        next_state = ST_CHECK;
+        next_state = ST_SYNC;
       else
         next_state = ST_DATA_INPUT;
     end
-    ST_CHECK: begin
-      if(!check_success && sync_done)//takes 2 cycles to transition from ST_CHECK to ST_GROUP_ACC
+    ST_SYNC: begin
+      if(input_sync)
         next_state = ST_GROUP_ACC;
-      else if(check_success)
-        next_state = ST_OUTPUT;
-      else
-        next_state = ST_CHECK;
+      else 
+        next_state = ST_SYNC;
     end
     ST_GROUP_ACC: begin
       if ( group_acc_element_count == DATA_SIZE )
@@ -891,6 +909,14 @@ always @(*) begin
         next_state = ST_CHECK;
       else
         next_state = ST_UPDATE;
+    end
+    ST_CHECK: begin
+      if(!check_success && sync_done)//takes 2 cycles to transition from ST_CHECK to ST_GROUP_ACC
+        next_state = ST_GROUP_ACC;
+      else if(check_success)
+        next_state = ST_OUTPUT;
+      else
+        next_state = ST_CHECK;
     end
     ST_OUTPUT: begin
       if(output_done)
