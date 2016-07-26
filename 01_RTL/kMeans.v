@@ -479,7 +479,7 @@ end
 reg     input_sync;
 always @(posedge clk) begin
   if (!rst_n) 
-    sync_done <= 1'b0;
+    input_sync <= 1'b0;
   else if (current_state==ST_SYNC && dummy_sync_count=='d1)
     input_sync <= 1'b1;
   else
