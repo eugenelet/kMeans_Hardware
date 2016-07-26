@@ -606,29 +606,29 @@ wire      [11:0]  data_num_wire1;
 wire      [11:0]  data_num_wire2;
 wire      [11:0]  data_num_wire3;
 always @(*) begin
-  case(min_idx)
+  case (min_idx) 
     'd0: begin
       data_num_wire0 = data_num0 + 'd1;
-      data_num_wire1 = data_num1;
-      data_num_wire2 = data_num2;
-      data_num_wire3 = data_num3;
+      //data_num_wire1 = data_num1;
+      //data_num_wire2 = data_num2;
+      //data_num_wire3 = data_num3;
     end
     'd1: begin
-      data_num_wire0 = data_num0;
+      //data_num_wire0 = data_num0;
       data_num_wire1 = data_num1 + 'd1;
-      data_num_wire2 = data_num2;
-      data_num_wire3 = data_num3;
+      //data_num_wire2 = data_num2;
+      //data_num_wire3 = data_num3;
     end
     'd2: begin
-      data_num_wire0 = data_num0;
-      data_num_wire1 = data_num1;
+      //data_num_wire0 = data_num0;
+      //data_num_wire1 = data_num1;
       data_num_wire2 = data_num2 + 'd1;
-      data_num_wire3 = data_num3;
+      //data_num_wire3 = data_num3;
     end
     'd3: begin
-      data_num_wire0 = data_num0;
-      data_num_wire1 = data_num1;
-      data_num_wire2 = data_num2;
+      //data_num_wire0 = data_num0;
+      //data_num_wire1 = data_num1;
+      //data_num_wire2 = data_num2;
       data_num_wire3 = data_num3 + 'd1;
     end
     default: begin
