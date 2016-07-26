@@ -601,34 +601,34 @@ end
 
 //DATA_NUM (CAN SHARE SAME ADDER)
 
-wire      [11:0]  data_num_wire0;
-wire      [11:0]  data_num_wire1;
-wire      [11:0]  data_num_wire2;
-wire      [11:0]  data_num_wire3;
+reg      [11:0]  data_num_wire0;
+reg      [11:0]  data_num_wire1;
+reg      [11:0]  data_num_wire2;
+reg      [11:0]  data_num_wire3;
 always @(*) begin
   case (min_idx) 
     'd0: begin
       data_num_wire0 = data_num0 + 'd1;
-      //data_num_wire1 = data_num1;
-      //data_num_wire2 = data_num2;
-      //data_num_wire3 = data_num3;
+      data_num_wire1 = data_num1;
+      data_num_wire2 = data_num2;
+      data_num_wire3 = data_num3;
     end
     'd1: begin
-      //data_num_wire0 = data_num0;
+      data_num_wire0 = data_num0;
       data_num_wire1 = data_num1 + 'd1;
-      //data_num_wire2 = data_num2;
-      //data_num_wire3 = data_num3;
+      data_num_wire2 = data_num2;
+      data_num_wire3 = data_num3;
     end
     'd2: begin
-      //data_num_wire0 = data_num0;
-      //data_num_wire1 = data_num1;
+      data_num_wire0 = data_num0;
+      data_num_wire1 = data_num1;
       data_num_wire2 = data_num2 + 'd1;
-      //data_num_wire3 = data_num3;
+      data_num_wire3 = data_num3;
     end
     'd3: begin
-      //data_num_wire0 = data_num0;
-      //data_num_wire1 = data_num1;
-      //data_num_wire2 = data_num2;
+      data_num_wire0 = data_num0;
+      data_num_wire1 = data_num1;
+      data_num_wire2 = data_num2;
       data_num_wire3 = data_num3 + 'd1;
     end
     default: begin
@@ -676,14 +676,14 @@ end
 
 //ACCU ELEMENT
 
-wire      [19:0]  accu_element_wirex0;
-wire      [19:0]  accu_element_wirex1;
-wire      [19:0]  accu_element_wirex2;
-wire      [19:0]  accu_element_wirex3;
-wire      [19:0]  accu_element_wirey0;
-wire      [19:0]  accu_element_wirey1;
-wire      [19:0]  accu_element_wirey2;
-wire      [19:0]  accu_element_wirey3;
+reg      [19:0]  accu_element_wirex0;
+reg      [19:0]  accu_element_wirex1;
+reg      [19:0]  accu_element_wirex2;
+reg      [19:0]  accu_element_wirex3;
+reg      [19:0]  accu_element_wirey0;
+reg      [19:0]  accu_element_wirey1;
+reg      [19:0]  accu_element_wirey2;
+reg      [19:0]  accu_element_wirey3;
 always @(*) begin
   case(min_idx)
     'd0: begin
